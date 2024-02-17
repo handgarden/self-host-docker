@@ -11,6 +11,10 @@ services:
     volumes:
       - /mnt/docker/obsidian/couchdb-data:/opt/couchdb/data
       - /mnt/docker/obsidian/couchdb-etc:/opt/couchdb/etc/local.d
-    ports:
-      - 5984:5984 
+    networks:
+      -  nginx_bridge
 
+networks:
+  nginx_bridge:
+    name: nginx_bridge
+    external: true
