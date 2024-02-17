@@ -1,0 +1,20 @@
+version: '3.1'
+
+networks:
+  nginx_bridge:
+    name: nginx_bridge
+    external: true
+
+services:
+  app:
+    container_name: vaultwarden
+    image: vaultwarden/server
+    restart: always
+    volumes:
+      - /mnt/docker/vault:/data
+    networks:
+      -  nginx_bridge
+    environment:
+      - TZ=Asia/Seoul
+      - SIGNUPS_ALLOWED=false #계정 생성 후에 컨테이너 다시 올릴 때 가입 막으면 됨
+      #- ADMIN_TOKEN=password #PW까먹었을때https://[domain]/admin
