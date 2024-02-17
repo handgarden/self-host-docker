@@ -1,0 +1,22 @@
+version: '3'
+
+networks:
+  nginx_bridge:
+    name: nginx_bridge
+    external: true
+    
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '22:22'
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+     - /mnt/docker/nginx/data:/data
+     - /mnt/docker/nginx/letsencrypt:/etc/letsencrypt
+     - /mnt/docker/nginx/snippets:/snippets:ro
+    networks:
+      - nginx_bridge
