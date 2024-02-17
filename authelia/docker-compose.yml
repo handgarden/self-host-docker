@@ -1,0 +1,19 @@
+services: 
+  authelia:
+    container_name: authelia
+    image: authelia/authelia
+    restart: unless-stopped
+    expose:
+      - 9091
+    volumes:
+      - /mnt/docker/authelia:/config
+    networks:
+      - nginx_bridge
+    environment:
+      TZ: 'Asia/Seoul'
+
+    
+networks:
+  nginx_bridge:
+    name: nginx_bridge
+    external: true
