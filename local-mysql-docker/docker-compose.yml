@@ -1,0 +1,27 @@
+version: '3.9'
+
+services: 
+  mysql:
+    image: mysql:8.0
+    container_name: local-db
+    command:
+      - --character-set-server=utf8
+      - --collation-server=utf8_general_ci
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+    volumes:
+      - local-mysql-data:/var/lib/mysql
+    ports: 
+      - "${MYSQL_PORT}:3306"
+    healthcheck:
+          test: mysqladmin ping -h localhost -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+          interval: 5s
+          retries: 55
+          start_period: 5s
+
+volumes:
+  local-mysql-data: 
