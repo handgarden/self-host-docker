@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce:alpine
+    restart: always
+    networks:
+      - nginx_bridge
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /mnt/docker/portainer:/data
+    expose:
+      - 9443
+
+networks:
+  nginx_bridge:
+    external: true
