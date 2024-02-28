@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   minio:
@@ -10,6 +10,7 @@ services:
       MINIO_ROOT_USER: ${ROOT_USER}
       MINIO_ROOT_PASSWORD: ${ROOT_PASSWORD}
       MINIO_SERVER_URL: ${SERVER_URL}
+      MINIO_REGION: ${REGION}
     command: server /data --console-address ":9090"
     ports:
       - 9000:9000
